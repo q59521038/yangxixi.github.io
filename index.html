@@ -361,38 +361,13 @@
 
       
         
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p> <a href="https://github.com/Bilibili/ijkplayer" target="_blank" rel="external">ijkplayer</a>是一个基于 ffplay 的轻量级 Android/iOS 视频播放器。实现了跨平台功能，API易于集成；编译配置可裁剪，方便控制安装包大小；支持硬件加速解码，更加省电；提供Android平台下应用弹幕集成的解决方案，此方案目前已用于主流APP，比如美拍和斗鱼直播 。</p>
+          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p> <a href="https://github.com/Bilibili/ijkplayer">ijkplayer</a>是一个基于 ffplay 的轻量级 Android/iOS 视频播放器。实现了跨平台功能，API易于集成；编译配置可裁剪，方便控制安装包大小；支持硬件加速解码，更加省电；提供Android平台下应用弹幕集成的解决方案，此方案目前已用于主流APP，比如美拍和斗鱼直播 。</p>
 <h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p> 建议在Mac下面编译，本人在Mac下面编译的，用windows去编译会有莫名的错误信息。</p>
-<h2 id="系统中确认有以下环境"><a href="#系统中确认有以下环境" class="headerlink" title="系统中确认有以下环境"></a>系统中确认有以下环境</h2><ol>
-<li>Git。（在终端里面输入git，有正确的反馈就是说明安装过了，否则可以根据提示自动搜索安装，或者在<a href="https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git" target="_blank" rel="external">Git</a>下载安装）</li>
-<li>ANDROID_SDK环境并且配置环境变量。（一般andorid studio都下载有这个sdk目录）</li>
-<li>ANDROID_NDK环境并且配置环境变量。（得自行下载，官方建议NDK r10e。第一去官方网站下载<a href="https://developer.android.com/ndk/index.html" target="_blank" rel="external">NDK</a>，第二是我的云盘里面下载了Mac的这个版本，去官网下载需要翻墙，<a href="http://pan.baidu.com/s/1c2gBCYk" target="_blank" rel="external">百度云地址</a>，提取码：d7f4）</li>
-</ol>
-<h2 id="配置sdk和ndk环境变量"><a href="#配置sdk和ndk环境变量" class="headerlink" title="配置sdk和ndk环境变量"></a>配置sdk和ndk环境变量</h2><ol>
-<li>启动Mac自带的终端Terminal。</li>
-<li>进入当前用户的home目录。<br> 在命令行输入echo $HOME</li>
-<li>创建.bash_profile文件。<br> 命令行输入touch .bash_profile</li>
-<li>打开.bash_profile文件。<br> 命令行输入open -e .bash_profile 此命令行输入完毕后，会自动弹出          .bash_profile 文件的编辑窗口</li>
-<li>在.bash_profile文件中输入 export PATH=/Users/您的用户名/文件路径/platform-tools/:$PATH。注意：如果需要添加多个路径到PATH下时，需要用“:”(英文的冒号)隔开。因为android和adb这些命令是在不同的文件夹中的，格式是：PATH=${PATH}:路径1:路径2、另外，如果指定多个路径，结尾就不用写:$PATH了。例如：export PATH=${PATH}:/Users/yangxixi/Library/Android/sdk/platform-tools:/Users/yangxixi/Library/Android/sdk/tools:/Users/yangxixi/Library/Android/android-ndk-r10e</li>
-<li>保存文件。<br> 直接关闭.bash_profile文件，即可自动保存您输入的内容。 </li>
-<li>更新刚配置的环境变量<br> 在命令行中输入source .bash_profile </li>
-<li>验证配置是否成功<br> 输入adb，如果没有出现-bash: adb: command not found；而出现adb的命令 参数解释。则表明环境变量配置成功。</li>
-<li>我的配置<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export PATH=$&#123;PATH&#125;:/Users/yangxixi/Library/Android/sdk/platform-tools:/Users/yangxixi/Library/Android/sdk/tools:/Users/yangxixi/Library/Android/android-ndk-r10e</span><br><span class="line">export ANDROID_SDK=/Users/yangxixi/Library/Android/sdk</span><br><span class="line">export ANDROID_NDK=/Users/yangxixi/Library/Android/android-ndk-r10e</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="下载与编译"><a href="#下载与编译" class="headerlink" title="下载与编译"></a>下载与编译</h1><h2 id="克隆代码"><a href="#克隆代码" class="headerlink" title="克隆代码"></a>克隆代码</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https:<span class="comment">//github.com/Bilibili/ijkplayer.git</span></span><br></pre></td></tr></table></figure>
-<h2 id="开始编译"><a href="#开始编译" class="headerlink" title="开始编译"></a>开始编译</h2><p>按照如下步骤一次进行：</p>
-<ol>
-<li>到克隆之后的主目录，执行 <code>./init-android.sh</code></li>
-<li>执行 <code>./compile-ffmpeg.sh clean</code></li>
-<li>执行 <code>./compile-ffmpeg.sh armv7a</code></li>
-<li>最后执行 <code>./compile-ijk.sh</code></li>
-<li>每一个步骤要耐心等待执行完毕，第一个步骤可能下载速度不快，后面编译的步骤等待执行完毕再继续。为什么只编译armv7a平台？是因为大部分的手机平台架构都是这个。</li>
-</ol>
-<h2 id="准备使用android-demo工程"><a href="#准备使用android-demo工程" class="headerlink" title="准备使用android demo工程"></a>准备使用android demo工程</h2><p>找到android目录下面的ijkplayer，可以看到armv7a目录下已经生成了so库。接着直接用android studio导入ijkplayer工程。直接运行即可。<br><img src="/images/ijkplayer/compile-bilibili-ijkplyer-001.png" alt="图片1"><br><img src="/images/ijkplayer/compile-bilibili-ijkplyer-002.png" alt="图片2"></p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/24/compile-bilibili-ijkplyer/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -518,35 +493,15 @@
 
       
         
-          
-            <h1 id="推荐使用轻量级的编辑器"><a href="#推荐使用轻量级的编辑器" class="headerlink" title="推荐使用轻量级的编辑器"></a>推荐使用轻量级的编辑器</h1><ul>
-<li><a href="http://soft.xiaoshujiang.com/" target="_blank" rel="external">小书匠编辑器</a></li>
+          <h1 id="推荐使用轻量级的编辑器"><a href="#推荐使用轻量级的编辑器" class="headerlink" title="推荐使用轻量级的编辑器"></a>推荐使用轻量级的编辑器</h1><ul>
+<li><a href="http://soft.xiaoshujiang.com/">小书匠编辑器</a></li>
 </ul>
 <h1 id="参考创建个人博客的网站"><a href="#参考创建个人博客的网站" class="headerlink" title="参考创建个人博客的网站"></a>参考创建个人博客的网站</h1><p>其中包括Mac和Windows下面的创建方法</p>
-<table>
-<thead>
-<tr>
-<th>基于Hexo+GitHub Pages 免费搭建个人博客最强教程</th>
-<th><a href="http://www.jianshu.com/p/2b9f202c13fd#" target="_blank" rel="external">http://www.jianshu.com/p/2b9f202c13fd#</a></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>使用Hexo建立个人博客</td>
-<td><a href="http://www.jianshu.com/p/871f5d8e9e4c#" target="_blank" rel="external">http://www.jianshu.com/p/871f5d8e9e4c#</a></td>
-</tr>
-<tr>
-<td>给自己在网上搭个窝-个人blog搭建超详细教程</td>
-<td><a href="http://www.jianshu.com/p/a4b74cc9ff28#" target="_blank" rel="external">http://www.jianshu.com/p/a4b74cc9ff28#</a></td>
-</tr>
-<tr>
-<td>手把手教你使用Hexo + Github Pages搭建个人独立博客</td>
-<td><a href="http://www.jianshu.com/p/93a7ca114b7f#" target="_blank" rel="external">http://www.jianshu.com/p/93a7ca114b7f#</a></td>
-</tr>
-</tbody>
-</table>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/16/hexo-helper/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
